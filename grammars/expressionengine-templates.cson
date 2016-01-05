@@ -1,0 +1,142 @@
+fileTypes: [
+  "html"
+  "htm"
+  "xhtml"
+]
+
+name: "ExpressionEngine Template"
+
+patterns: [
+  {
+    include: "#ee-comments"
+  }
+  {
+    include: "#ee-overall-tags"
+  }
+  {
+    comment: "This is set to use XHTML standards, but you can change that by changing .strict to .basic for HTML standards"
+    include: "text.html.basic"
+  }
+]
+
+repository:
+
+  "ee-comments":
+    begin: "\\{\\!--"
+    end: "--\\}"
+    name: "comment.block.ee"
+
+  "ee-overall-tags":
+    begin: "\\{(\\s?)"
+    end: "(\\s?)\\}"
+    name: "punctuation.tag.ee"
+    patterns: [
+      {
+        include: "#ee-overall-tags"
+      }
+      {
+        include: "#ee-tags"
+      }
+      {
+        include: "#ee-tag-parameters"
+      }
+      {
+        include: "#ee-tag-conditionals"
+      }
+      {
+        include: "#tag-stuff"
+      }
+    ]
+
+  "ee-tags":
+    match: "(/?exp(:\\w+)+|layout=|layout(:\\w+)|embed=)"
+    name: "meta.function-call.ee"
+
+  "ee-tag-parameters":
+    match: "(\\w+)=(?!=)"
+    name: "support.function.parameter.ee"
+
+  "ee-variable":
+    match: '(/?\\w+)((:\\w+)+)?'
+    captures:
+      "1":
+        name: 'variable.language.ee'
+      "2":
+        name: "support.class.ee"
+
+  "ee-var-modifiers":
+    match: "(\\s)?(\\|)(\\s)?(\\w+(:\\w+)?)+"
+    captures:
+      "2":
+        name: "keyword.operator.other.ee"
+      "4":
+        name: "support.function.ee"
+
+  "ee-tag-conditionals":
+    match: "(/?if(:else)?(:elseif)?)"
+    name: "keyword.control.ee"
+
+  "ee-comparison-operators":
+    match: "(\\(|\\)|<=|>=|<>|<|>|=|!=|==|===|!==|~|\\^=|\\*=|\\$=|\\^|\\*\\*|\\/|\\%|\\+|-)"
+    name: "keyword.operator.logical.ee"
+
+  "ee-and-or-operators":
+    match: "(or|OR|and|AND|&&|\\|\\|)"
+    name: "keyword.operator.logical.ee"
+
+  "ee-constant-language":
+    match: "(\\G|\\s|\\b)(true|TRUE|false|FALSE|yes|YES|no|NO)\\b"
+    captures:
+      "2":
+        name: "constant.language.ee"
+
+  "ee-constant-numbers":
+    match: "(\\d*)?\\.?(\\d+)"
+    name: "constant.numeric.ee"
+
+  "ee-not-operator":
+    match: "(\\s|^)(!)"
+    name: "keyword.operator.other.ee"
+
+  "ee-string-double-quoted":
+    begin: "\""
+    end: "\""
+    name: "string.quoted.double.html"
+
+  "ee-string-single-quoted":
+    begin: "'"
+    end: "'"
+    name: "string.quoted.single.html"
+
+  "tag-stuff":
+    patterns: [
+      {
+        include: "#ee-constant-numbers"
+      }
+      {
+        include: "#ee-constant-language"
+      }
+      {
+        include: "#ee-and-or-operators"
+      }
+      {
+        include: "#ee-variable"
+      }
+      {
+        include: "#ee-var-modifiers"
+      }
+      {
+        include: "#ee-comparison-operators"
+      }
+      {
+        include: "#ee-not-operator"
+      }
+      {
+        include: "#ee-string-double-quoted"
+      }
+      {
+        include: "#ee-string-single-quoted"
+      }
+    ]
+
+scopeName: "text.html.ee"
