@@ -1,10 +1,9 @@
 {
   "name": "language-expressionengine-templates",
   "main": "./lib/language-expressionengine-templates",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Syntax highlighting for Expressionengine tags and variables within your templates",
-  "keywords": [
-  ],
+  "keywords": [],
   "activationCommands": {
     "atom-workspace": "language-expressionengine-templates:toggle"
   },
@@ -13,6 +12,5 @@
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
