@@ -49,11 +49,11 @@ repository:
     ]
 
   "ee-tags":
-    match: "(/?exp(:\\w+)+|layout=|layout(:\\w+)|embed=)"
+    match: "(/?exp(:\\w+)+|layout=|/?layout(:\\w+)|embed=)"
     name: "meta.function-call.ee"
 
   "ee-tag-parameters":
-    match: "(\\w+)=(?!=)"
+    match: "(\\w+(:\\w+)?)=(?!=)"
     name: "support.function.parameter.ee"
 
   "ee-variable":
